@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 4.9.5
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Waktu pembuatan: 09 Okt 2020 pada 21.28
--- Versi server: 10.3.16-MariaDB
--- Versi PHP: 7.3.7
+-- Host: localhost:3306
+-- Waktu pembuatan: 25 Okt 2020 pada 03.47
+-- Versi server: 5.7.24
+-- Versi PHP: 7.2.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -50,6 +50,51 @@ INSERT INTO `tbl_blok` (`id_blok`, `nama_blok`, `pj_blok`, `no_hp_pj`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `tbl_blok_nomor`
+--
+
+CREATE TABLE `tbl_blok_nomor` (
+  `id` int(3) NOT NULL,
+  `nomor` int(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tbl_blok_nomor`
+--
+
+INSERT INTO `tbl_blok_nomor` (`id`, `nomor`) VALUES
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 5);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tbl_iuran`
+--
+
+CREATE TABLE `tbl_iuran` (
+  `id` int(3) NOT NULL,
+  `tanggal` date DEFAULT NULL,
+  `nama_petugas` varchar(50) NOT NULL,
+  `tipe` varchar(15) NOT NULL,
+  `blok` int(2) NOT NULL,
+  `penghasilan` int(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tbl_iuran`
+--
+
+INSERT INTO `tbl_iuran` (`id`, `tanggal`, `nama_petugas`, `tipe`, `blok`, `penghasilan`) VALUES
+(1, '2020-10-23', 'Hendrik', 'Kebersihan', 6, 2000000),
+(2, '2020-10-25', 'Agus', 'Keamanan', 3, 1000000);
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `tbl_jns`
 --
 
@@ -78,22 +123,23 @@ INSERT INTO `tbl_jns` (`id_jns`, `nama_jns`) VALUES
 CREATE TABLE `tbl_pedagang` (
   `id_pedagang` int(100) NOT NULL,
   `no_pendaftaran` varchar(20) NOT NULL,
-  `password` text DEFAULT NULL,
+  `password` text,
   `nokk` int(30) DEFAULT NULL,
   `nik` int(30) DEFAULT NULL,
   `nama_lengkap` varchar(100) DEFAULT NULL,
   `jk` varchar(12) DEFAULT NULL,
-  `tempat_lahir` text DEFAULT NULL,
+  `tempat_lahir` text,
   `tgl_lahir` varchar(10) DEFAULT NULL,
   `agama` varchar(30) DEFAULT NULL,
   `status_keluarga` varchar(30) DEFAULT NULL,
-  `alamat_pedagang` text DEFAULT NULL,
+  `alamat_pedagang` text,
   `no_hp_pedagang` varchar(14) DEFAULT NULL,
   `nama_dagangan` varchar(100) DEFAULT NULL,
   `jns_dagangan` varchar(100) DEFAULT NULL,
   `no_hp_dagangan` varchar(14) DEFAULT NULL,
   `blokdagangan` varchar(100) DEFAULT NULL,
-  `detail_lokasi_dagangan` text DEFAULT NULL,
+  `bloknomor` int(3) NOT NULL,
+  `detail_lokasi_dagangan` text,
   `foto` varchar(100) DEFAULT NULL,
   `tgl_pedagang` datetime DEFAULT NULL,
   `status_verifikasi` varchar(30) DEFAULT NULL,
@@ -104,14 +150,30 @@ CREATE TABLE `tbl_pedagang` (
 -- Dumping data untuk tabel `tbl_pedagang`
 --
 
-INSERT INTO `tbl_pedagang` (`id_pedagang`, `no_pendaftaran`, `password`, `nokk`, `nik`, `nama_lengkap`, `jk`, `tempat_lahir`, `tgl_lahir`, `agama`, `status_keluarga`, `alamat_pedagang`, `no_hp_pedagang`, `nama_dagangan`, `jns_dagangan`, `no_hp_dagangan`, `blokdagangan`, `detail_lokasi_dagangan`, `foto`, `tgl_pedagang`, `status_verifikasi`, `status_pendaftaran`) VALUES
-(10, 'PGG18004003', 'PGG18004003', 123, 123, 'dd', 'Laki-Laki', '123', '01-01-1990', 'Islam', NULL, '123', '123', '123', 'Makanan', '123', '1', '123', NULL, '2020-10-02 15:32:00', 'ditolak', 'berhasil'),
-(11, 'PGG18004004', 'PGG18004004', 123, 123, '123', 'Laki-Laki', '123', '01-01-1990', 'Islam', NULL, '123', '123', '123', 'Pakaian', '123', '1', '123', NULL, '2020-10-04 07:10:17', 'ditolak', 'berhasil'),
-(9, 'PGG18004002', 'PGG18004002', 123, 123, '123', 'Laki-Laki', '123', '01-01-1990', 'Islam', NULL, '123', '123', 'odading mang oleh', 'Makanan', '123', 'Makanan', '123', NULL, '2020-10-02 00:03:44', 'ditolak', 'berhasil'),
-(12, 'PGG18004005', 'PGG18004005', 123, 123, '123', 'Laki-Laki', '123', '01-01-1990', 'Kristen', NULL, '123', '123', 'odading mang oleh', 'Makanan', '123', '1', 'dekat pintu masuk', NULL, '2020-10-04 07:16:30', 'ditolak', 'berhasil'),
-(13, 'PGG18004006', 'PGG18004006', 123, 123, '123', 'Laki-Laki', '123', '01-01-1990', 'Islam', NULL, '123', '123', '123', 'Makanan', '123', '1', '123', NULL, '2020-10-04 07:28:56', 'diterima', 'berhasil'),
-(14, 'PGG18004007', 'PGG18004007', 123, 123, '123', 'Laki-Laki', '123', '01-01-1990', 'Islam', NULL, '123', '123', '123', 'Makanan', '123', '1', '123', '41155050160113_41155050160113_IMG_0003.png', '2020-10-04 07:37:31', 'ditolak', 'berhasil'),
-(15, 'PGG18004008', 'PGG18004008', 123, 1234, 'Baba', 'Laki-Laki', '123', '01-01-1990', 'Islam', NULL, '123', '123', '123', 'Makanan', '123', '1', '123', '41155050160113_41155050160113_IMG_0003.png', '2020-10-04 07:38:16', 'diterima', 'berhasil');
+INSERT INTO `tbl_pedagang` (`id_pedagang`, `no_pendaftaran`, `password`, `nokk`, `nik`, `nama_lengkap`, `jk`, `tempat_lahir`, `tgl_lahir`, `agama`, `status_keluarga`, `alamat_pedagang`, `no_hp_pedagang`, `nama_dagangan`, `jns_dagangan`, `no_hp_dagangan`, `blokdagangan`, `bloknomor`, `detail_lokasi_dagangan`, `foto`, `tgl_pedagang`, `status_verifikasi`, `status_pendaftaran`) VALUES
+(10, 'PGG18004003', 'PGG18004003', 123, 123, 'dd', 'Laki-Laki', '123', '01-01-1990', 'Islam', NULL, '123', '123', '123', 'Makanan', '123', '1', 1, '123', NULL, '2020-10-02 15:32:00', 'ditolak', 'berhasil'),
+(11, 'PGG18004004', 'PGG18004004', 123, 123, '123', 'Laki-Laki', '123', '01-01-1990', 'Islam', NULL, '123', '123', '123', 'Pakaian', '123', '1', 2, '123', NULL, '2020-10-04 07:10:17', 'ditolak', 'berhasil'),
+(12, 'PGG18004005', 'PGG18004005', 123, 123, '123', 'Laki-Laki', '123', '01-01-1990', 'Kristen', NULL, '123', '123', 'odading mang oleh', 'Makanan', '123', '1', 3, 'dekat pintu masuk', NULL, '2020-10-04 07:16:30', 'ditolak', 'berhasil'),
+(13, 'PGG18004006', 'PGG18004006', 123, 123, '123', 'Laki-Laki', '123', '01-01-1990', 'Islam', NULL, '123', '123', '123', 'Makanan', '123', '3', 2, '123', NULL, '2020-10-04 07:28:56', 'diterima', 'berhasil'),
+(14, 'PGG18004007', 'PGG18004007', 123, 123, '123', 'Laki-Laki', '123', '01-01-1990', 'Islam', NULL, '123', '123', '123', 'Makanan', '123', '1', 5, '123', '41155050160113_41155050160113_IMG_0003.png', '2020-10-04 07:37:31', 'ditolak', 'berhasil'),
+(16, 'PGG18004009', 'PGG18004009', 2147483647, 2147483647, 'Lengkap Sekali', 'Laki-Laki', 'Majapahit', '01-01-1990', 'lainnya', NULL, 'Jalan candi ', '089898989898', 'Dagang Nangka', 'Elektronik', '08989898989', '4', 2, 'Jalan candi block E', '3.jpg', '2020-10-23 16:45:40', 'diterima', 'berhasil');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tbl_permohonan`
+--
+
+CREATE TABLE `tbl_permohonan` (
+  `id` int(3) NOT NULL,
+  `user_id` int(3) NOT NULL,
+  `perihal` varchar(25) NOT NULL,
+  `blokdagangan_awal` int(3) NOT NULL,
+  `bloknomor_awal` int(3) NOT NULL,
+  `blokdagangan` int(3) NOT NULL,
+  `bloknomor` int(3) NOT NULL,
+  `status` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -122,7 +184,7 @@ INSERT INTO `tbl_pedagang` (`id_pedagang`, `no_pendaftaran`, `password`, `nokk`,
 CREATE TABLE `tbl_user` (
   `id_user` int(11) NOT NULL,
   `username` varchar(100) DEFAULT NULL,
-  `password` text DEFAULT NULL,
+  `password` text,
   `nama_lengkap` varchar(100) DEFAULT NULL,
   `level` varchar(10) DEFAULT NULL,
   `tgl_daftar` datetime DEFAULT NULL
@@ -143,8 +205,8 @@ INSERT INTO `tbl_user` (`id_user`, `username`, `password`, `nama_lengkap`, `leve
 
 CREATE TABLE `tbl_verifikasi` (
   `id_verifikasi` int(10) NOT NULL,
-  `isi` text DEFAULT NULL,
-  `ket` text DEFAULT NULL,
+  `isi` text,
+  `ket` text,
   `tgl_verifikasi` datetime DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -172,7 +234,7 @@ CREATE TABLE `tbl_web` (
 --
 
 INSERT INTO `tbl_web` (`id_web`, `status_ppg`, `tgl_diubah`) VALUES
-(1, 'buka', '2020-10-10 02:26:54');
+(1, 'buka', '2020-10-24 23:42:34');
 
 --
 -- Indexes for dumped tables
@@ -185,6 +247,18 @@ ALTER TABLE `tbl_blok`
   ADD PRIMARY KEY (`id_blok`);
 
 --
+-- Indeks untuk tabel `tbl_blok_nomor`
+--
+ALTER TABLE `tbl_blok_nomor`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `tbl_iuran`
+--
+ALTER TABLE `tbl_iuran`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeks untuk tabel `tbl_jns`
 --
 ALTER TABLE `tbl_jns`
@@ -195,6 +269,12 @@ ALTER TABLE `tbl_jns`
 --
 ALTER TABLE `tbl_pedagang`
   ADD PRIMARY KEY (`id_pedagang`) USING BTREE;
+
+--
+-- Indeks untuk tabel `tbl_permohonan`
+--
+ALTER TABLE `tbl_permohonan`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indeks untuk tabel `tbl_user`
@@ -225,6 +305,18 @@ ALTER TABLE `tbl_blok`
   MODIFY `id_blok` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
+-- AUTO_INCREMENT untuk tabel `tbl_blok_nomor`
+--
+ALTER TABLE `tbl_blok_nomor`
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT untuk tabel `tbl_iuran`
+--
+ALTER TABLE `tbl_iuran`
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT untuk tabel `tbl_jns`
 --
 ALTER TABLE `tbl_jns`
@@ -234,7 +326,13 @@ ALTER TABLE `tbl_jns`
 -- AUTO_INCREMENT untuk tabel `tbl_pedagang`
 --
 ALTER TABLE `tbl_pedagang`
-  MODIFY `id_pedagang` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_pedagang` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT untuk tabel `tbl_permohonan`
+--
+ALTER TABLE `tbl_permohonan`
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_user`
