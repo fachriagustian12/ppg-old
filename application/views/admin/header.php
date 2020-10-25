@@ -156,6 +156,8 @@ $sub_menu3 = strtolower($this->uri->segment(3));
 
 								<li class="<?php if($menu == 'panel_admin' AND $sub_menu == 'permohonan'){echo 'active';} ?>"><a href="panel_admin/permohonan"><i class="icon-file-text"></i> <span>Permohonan Pedagang</span></a></li>
 
+								<li class="<?php if($menu == 'panel_admin' AND $sub_menu == 'keanggotaan'){echo 'active';} ?>"><a href="panel_admin/keanggotaan"><i class="icon-file-text"></i> <span>Permohonan Keanggotaan</span></a></li>
+
 								<li class="<?php if($menu == 'panel_admin' AND $sub_menu == 'set_pengumuman'){echo 'active';} ?>"><a href="panel_admin/set_pengumuman"><i class="icon-display4"></i> <span>Setting Pengumuman</span></a></li>
 
 								<li class="<?php if($menu == 'panel_admin' AND $sub_menu == 'statistik'){echo 'active';} ?>"><a href="panel_admin/statistik"><i class="icon-stats-dots"></i> <span>Statistik Pendaftaran</span></a></li>

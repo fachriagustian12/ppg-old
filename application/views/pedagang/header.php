@@ -140,6 +140,8 @@ $sub_menu3 = strtolower($this->uri->segment(3));
 
 								<li class="<?php if($menu == 'panel_pedagang' AND $sub_menu == 'permohonan'){echo 'active';} ?>"><a href="panel_pedagang/permohonan"><i class="icon-file-text"></i> <span>Permohonan Pindah Lokasi</span></a></li>
 
+								<li class="<?php if($menu == 'panel_pedagang' AND $sub_menu == 'keanggotaan'){echo 'active';} ?>"><a href="panel_pedagang/keanggotaan"><i class="icon-file-text"></i> <span>Permohonan Perpanjang Keanggotaan</span></a></li>
+
 								<li><a href="panel_pedagang/cetak" target="_blank"><i class="icon-printer2"></i> <span>Cetak Bukti Pendaftaran</span></a></li>
 								
 

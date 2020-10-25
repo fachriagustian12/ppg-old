@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Waktu pembuatan: 25 Okt 2020 pada 03.47
+-- Waktu pembuatan: 25 Okt 2020 pada 10.30
 -- Versi server: 5.7.24
 -- Versi PHP: 7.2.19
 
@@ -142,6 +142,7 @@ CREATE TABLE `tbl_pedagang` (
   `detail_lokasi_dagangan` text,
   `foto` varchar(100) DEFAULT NULL,
   `tgl_pedagang` datetime DEFAULT NULL,
+  `tgl_keanggotaan` date DEFAULT NULL,
   `status_verifikasi` varchar(30) DEFAULT NULL,
   `status_pendaftaran` varchar(20) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -150,13 +151,13 @@ CREATE TABLE `tbl_pedagang` (
 -- Dumping data untuk tabel `tbl_pedagang`
 --
 
-INSERT INTO `tbl_pedagang` (`id_pedagang`, `no_pendaftaran`, `password`, `nokk`, `nik`, `nama_lengkap`, `jk`, `tempat_lahir`, `tgl_lahir`, `agama`, `status_keluarga`, `alamat_pedagang`, `no_hp_pedagang`, `nama_dagangan`, `jns_dagangan`, `no_hp_dagangan`, `blokdagangan`, `bloknomor`, `detail_lokasi_dagangan`, `foto`, `tgl_pedagang`, `status_verifikasi`, `status_pendaftaran`) VALUES
-(10, 'PGG18004003', 'PGG18004003', 123, 123, 'dd', 'Laki-Laki', '123', '01-01-1990', 'Islam', NULL, '123', '123', '123', 'Makanan', '123', '1', 1, '123', NULL, '2020-10-02 15:32:00', 'ditolak', 'berhasil'),
-(11, 'PGG18004004', 'PGG18004004', 123, 123, '123', 'Laki-Laki', '123', '01-01-1990', 'Islam', NULL, '123', '123', '123', 'Pakaian', '123', '1', 2, '123', NULL, '2020-10-04 07:10:17', 'ditolak', 'berhasil'),
-(12, 'PGG18004005', 'PGG18004005', 123, 123, '123', 'Laki-Laki', '123', '01-01-1990', 'Kristen', NULL, '123', '123', 'odading mang oleh', 'Makanan', '123', '1', 3, 'dekat pintu masuk', NULL, '2020-10-04 07:16:30', 'ditolak', 'berhasil'),
-(13, 'PGG18004006', 'PGG18004006', 123, 123, '123', 'Laki-Laki', '123', '01-01-1990', 'Islam', NULL, '123', '123', '123', 'Makanan', '123', '3', 2, '123', NULL, '2020-10-04 07:28:56', 'diterima', 'berhasil'),
-(14, 'PGG18004007', 'PGG18004007', 123, 123, '123', 'Laki-Laki', '123', '01-01-1990', 'Islam', NULL, '123', '123', '123', 'Makanan', '123', '1', 5, '123', '41155050160113_41155050160113_IMG_0003.png', '2020-10-04 07:37:31', 'ditolak', 'berhasil'),
-(16, 'PGG18004009', 'PGG18004009', 2147483647, 2147483647, 'Lengkap Sekali', 'Laki-Laki', 'Majapahit', '01-01-1990', 'lainnya', NULL, 'Jalan candi ', '089898989898', 'Dagang Nangka', 'Elektronik', '08989898989', '4', 2, 'Jalan candi block E', '3.jpg', '2020-10-23 16:45:40', 'diterima', 'berhasil');
+INSERT INTO `tbl_pedagang` (`id_pedagang`, `no_pendaftaran`, `password`, `nokk`, `nik`, `nama_lengkap`, `jk`, `tempat_lahir`, `tgl_lahir`, `agama`, `status_keluarga`, `alamat_pedagang`, `no_hp_pedagang`, `nama_dagangan`, `jns_dagangan`, `no_hp_dagangan`, `blokdagangan`, `bloknomor`, `detail_lokasi_dagangan`, `foto`, `tgl_pedagang`, `tgl_keanggotaan`, `status_verifikasi`, `status_pendaftaran`) VALUES
+(10, 'PGG18004003', 'PGG18004003', 123, 123, 'dd', 'Laki-Laki', '123', '01-01-1990', 'Islam', NULL, '123', '123', '123', 'Makanan', '123', '1', 1, '123', NULL, '2020-10-02 15:32:00', NULL, 'ditolak', 'berhasil'),
+(11, 'PGG18004004', 'PGG18004004', 123, 123, '123', 'Laki-Laki', '123', '01-01-1990', 'Islam', NULL, '123', '123', '123', 'Pakaian', '123', '1', 2, '123', NULL, '2020-10-04 07:10:17', NULL, 'ditolak', 'berhasil'),
+(12, 'PGG18004005', 'PGG18004005', 123, 123, '123', 'Laki-Laki', '123', '01-01-1990', 'Kristen', NULL, '123', '123', 'odading mang oleh', 'Makanan', '123', '1', 3, 'dekat pintu masuk', NULL, '2020-10-04 07:16:30', NULL, 'ditolak', 'berhasil'),
+(13, 'PGG18004006', 'PGG18004006', 123, 123, '123', 'Laki-Laki', '123', '01-01-1990', 'Islam', NULL, '123', '123', '123', 'Makanan', '123', '3', 2, '123', NULL, '2020-10-04 07:28:56', NULL, 'diterima', 'berhasil'),
+(14, 'PGG18004007', 'PGG18004007', 123, 123, '123', 'Laki-Laki', '123', '01-01-1990', 'Islam', NULL, '123', '123', '123', 'Makanan', '123', '1', 5, '123', '41155050160113_41155050160113_IMG_0003.png', '2020-10-04 07:37:31', NULL, 'ditolak', 'berhasil'),
+(16, 'PGG18004009', 'PGG18004009', 2147483647, 2147483647, 'Lengkap Sekali', 'Laki-Laki', 'Majapahit', '01-01-1990', 'lainnya', NULL, 'Jalan candi ', '089898989898', 'Dagang Nangka', 'Elektronik', '08989898989', '4', 2, 'Jalan candi block E', '3.jpg', '2020-10-23 16:45:40', '2022-10-25', 'diterima', 'berhasil');
 
 -- --------------------------------------------------------
 
@@ -174,6 +175,28 @@ CREATE TABLE `tbl_permohonan` (
   `bloknomor` int(3) NOT NULL,
   `status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tbl_permohonan_keanggotaan`
+--
+
+CREATE TABLE `tbl_permohonan_keanggotaan` (
+  `id` int(3) NOT NULL,
+  `user_id` int(3) NOT NULL,
+  `perihal` varchar(50) NOT NULL,
+  `tgl_keanggotaan_awal` text NOT NULL,
+  `jangka` int(3) NOT NULL,
+  `status` int(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tbl_permohonan_keanggotaan`
+--
+
+INSERT INTO `tbl_permohonan_keanggotaan` (`id`, `user_id`, `perihal`, `tgl_keanggotaan_awal`, `jangka`, `status`) VALUES
+(3, 16, 'Pindah Lokas', '2021-10-25', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -277,6 +300,12 @@ ALTER TABLE `tbl_permohonan`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indeks untuk tabel `tbl_permohonan_keanggotaan`
+--
+ALTER TABLE `tbl_permohonan_keanggotaan`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeks untuk tabel `tbl_user`
 --
 ALTER TABLE `tbl_user`
@@ -333,6 +362,12 @@ ALTER TABLE `tbl_pedagang`
 --
 ALTER TABLE `tbl_permohonan`
   MODIFY `id` int(3) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `tbl_permohonan_keanggotaan`
+--
+ALTER TABLE `tbl_permohonan_keanggotaan`
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_user`

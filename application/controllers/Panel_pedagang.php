@@ -16,10 +16,7 @@ class Panel_pedagang extends CI_Controller {
 			$this->load->view('pedagang/header', $data);
 			$this->load->view('pedagang/dashboard', $data);
 			$this->load->view('pedagang/footer');
-
-
 		}
-
 	}
 
 	public function pengumuman()
@@ -47,9 +44,9 @@ class Panel_pedagang extends CI_Controller {
  			$data['judul_web'] 		= "Biodata ".ucwords($data['user']->row()->nama_lengkap);
  			$data['ngambilblok'] = $this->Model_data->ngambilblok($id)->row();
 
-					$this->load->view('pedagang/header', $data);
-					$this->load->view('pedagang/biodata', $data);
-					$this->load->view('pedagang/footer');
+			$this->load->view('pedagang/header', $data);
+			$this->load->view('pedagang/biodata', $data);
+			$this->load->view('pedagang/footer');
 		}
 	}
 
@@ -62,10 +59,12 @@ class Panel_pedagang extends CI_Controller {
 			$data['user']  			  = $this->db->get_where('tbl_pedagang', "no_pendaftaran='$ceks'");
  			$id=$data['user']->row()->blokdagangan;
  			$data['judul_web'] 		= "Biodata ".ucwords($data['user']->row()->nama_lengkap);
-			 $data['ngambilblok'] = $this->Model_data->ngambilblok($id)->row();
-			 $data['blok'] = $this->db->get('tbl_blok')->result();
-			 $data['bloknumber'] = $this->db->get('tbl_blok_nomor')->result();
-			 $data['permohonan'] = $this->db->get('tbl_permohonan');
+			$data['ngambilblok'] = $this->Model_data->ngambilblok($id)->row();
+			$data['blok'] = $this->db->get('tbl_blok')->result();
+			$data['bloknumber'] = $this->db->get('tbl_blok_nomor')->result();
+			$this->db->where('user_id',$data['user']->row()->id_pedagang);
+			$this->db->order_by('id','DESC');
+			$data['permohonan'] = $this->db->get('tbl_permohonan');
 
 			$this->load->view('pedagang/header', $data);
 			$this->load->view('pedagang/permohonan', $data);
@@ -84,6 +83,41 @@ class Panel_pedagang extends CI_Controller {
 		);
 		$this->db->insert('tbl_permohonan',$data);
 		redirect('panel_pedagang');
+	}
+
+	public function keanggotaan()
+	{
+		$ceks = $this->session->userdata('no_pendaftaran');
+		if(!isset($ceks)) {
+			redirect('logcs');
+		}else{
+			$data['user']  			  = $this->db->get_where('tbl_pedagang', "no_pendaftaran='$ceks'");
+ 			$id=$data['user']->row()->blokdagangan;
+ 			$data['judul_web'] 		= "Biodata ".ucwords($data['user']->row()->nama_lengkap);
+			$data['ngambilblok'] = $this->Model_data->ngambilblok($id)->row();
+			$data['blok'] = $this->db->get('tbl_blok')->result();
+			$data['bloknumber'] = $this->db->get('tbl_blok_nomor')->result();
+			$this->db->where('user_id',$data['user']->row()->id_pedagang);
+			$this->db->order_by('id','DESC');
+			$data['keanggotaan'] = $this->db->get('tbl_permohonan_keanggotaan');
+
+			$this->load->view('pedagang/header', $data);
+			$this->load->view('pedagang/keanggotaan', $data);
+			$this->load->view('pedagang/footer');
+		}
+	}
+
+	public function tambahkeanggotaan($id)
+	{
+		$data = array(
+			'user_id' => $id,
+			'perihal' => $this->input->post('tipe'),
+			'tgl_keanggotaan_awal' => $this->input->post('tgl_keanggotaan_awal'),
+			'jangka	' => $this->input->post('jangka'),
+			'status' => 0
+		);
+		$this->db->insert('tbl_permohonan_keanggotaan',$data);
+		redirect('panel_pedagang/keanggotaan');
 	}
 
 
@@ -126,7 +160,7 @@ class Panel_pedagang extends CI_Controller {
 		if ($this->session->userdata('no_pendaftaran') != '') {
 			$this->session->sess_destroy();
 		}
-		 redirect('');
+		redirect('');
 	}
 
 }

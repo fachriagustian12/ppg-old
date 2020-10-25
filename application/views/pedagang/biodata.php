@@ -84,6 +84,12 @@ $user = $user->row();?>
                       <th>:</th>
                       <td><?php echo $user->no_hp_pedagang; ?></td>
                     </tr>
+                    <tr>
+                      <th>Keanggotaan</th>
+                      <th>:</th>
+                      <td><?php if($user->tgl_keanggotaan == NULL){echo "-";}else{echo date('d F Y', strtotime($user->tgl_keanggotaan));} ?></td>
+                    </tr>
+                    
                 </table>
               </div>
             </fieldset>

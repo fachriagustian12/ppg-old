@@ -219,27 +219,104 @@ class Panel_admin extends CI_Controller {
 		$this->db->where('id',$id);
 		$this->db->update('tbl_permohonan',$data);
 
-		$data2 = array(
-			'blokdagangan'=> $blokdagangan,
-			'bloknomor'=> $bloknomor
-		);
-		$this->db->where('id_pedagang',$id_user);
-		$this->db->update('tbl_pedagang',$data2);
+		if($status == 1){
+			$data2 = array(
+				'blokdagangan'=> $blokdagangan,
+				'bloknomor'=> $bloknomor
+			);
+			$this->db->where('id_pedagang',$id_user);
+			$this->db->update('tbl_pedagang',$data2);
+		}
 
 		redirect('panel_admin/permohonan');
 	}
-
 	public function deletePermohonan($id)
 	{
 		$this->db->where('id',$id);
 		$this->db->delete('tbl_permohonan');
 		redirect('panel_admin/permohonan');
 	}
+	
+	public function keanggotaan()
+	{
+		$ceks = $this->session->userdata('ppg');
+		if(!isset($ceks)) {
+			$this->load->view('404_content');
+		}else {
+			$data['user']   	 = $this->db->get_where('tbl_user', "username='$ceks'");
+			$data['web_ppg']	 = $this->db->get_where('tbl_web', "id_web='1'")->row();
+			$data['keanggotaan']		 = $this->db->get('tbl_permohonan_keanggotaan')->result();
+			$data['blok']		 = $this->db->get('tbl_blok')->result();
+			$data['bloknomor']		 = $this->db->get('tbl_blok_nomor')->result();
+			$data['pedagang']		= $this->db->get('tbl_pedagang')->result();
+			$data['judul_web'] = "Dashboard";
+			$this->load->view('admin/header', $data);
+			$this->load->view('admin/keanggotaan/keanggotaan', $data);
+			$this->load->view('admin/footer');
 
+			if (isset($_POST['btnnonaktif'])){
+				$data = array(
+					'status_ppg'	=> 'tutup',
+					'tgl_diubah'  => $this->Model_data->date('waktu_default')
+				);
+				$this->db->update('tbl_web', $data, array('id_web' => '1'));
+				redirect('panel_admin');
+			}
+			if (isset($_POST['btnaktif'])){
+				$data = array(
+					'status_ppg'	=> 'buka',
+					'tgl_diubah'  => $this->Model_data->date('waktu_default')
+				);
+				$this->db->update('tbl_web', $data, array('id_web' => '1'));
+				redirect('panel_admin');
+			}
+		}
+	}
+
+	
+	
+	public function editStatusKeanggotaan($id,$status,$id_user,$tgl_keanggotaan,$jangka)
+	{
+		$data = array(
+			'status' => $status
+		);
+		$this->db->where('id',$id);
+		$this->db->update('tbl_permohonan_keanggotaan',$data);
+		$tgl = date_create($tgl_keanggotaan);
+		// $tgl2 = $tgl->format('Y-m-d');
+		if ($status == 1) {
+			if ($jangka == 1) {
+				$tglTambah = date_add($tgl, date_interval_create_from_date_string('1 Years'));
+			}else if($jangka ==2){
+				$tglTambah = date_add($tgl, date_interval_create_from_date_string('2 Years'));
+			}else if($jangka == 3){
+				$tglTambah = date_add($tgl, date_interval_create_from_date_string('3 Years'));
+			}
+			$tgls = date_format($tglTambah,'Y-m-d');
+			$data2 = array(
+				'tgl_keanggotaan'=> $tgls
+			);
+			$this->db->where('id_pedagang',$id_user);
+			$this->db->update('tbl_pedagang',$data2);
+		}
+
+		redirect('panel_admin/keanggotaan');
+	}
+
+	public function deleteKeanggotaan($id)
+	{
+		$this->db->where('id',$id);
+		$this->db->delete('tbl_permohonan_keanggotaan');
+		redirect('panel_admin/keanggotaan');
+	}
 
 	public function terima(){
 		$kriteria_id = $this->uri->segment(3);
+		$tgl_skrg = date();
+		$tambah = mktime(0,0,0,date('m')+0,date('d')+0,date('Y')+1);
+		$tglTambah = date('Y-m-d',$tambah);
 		$data = array(
+			'tgl_keanggotaan' => $tglTambah,
 		'status_verifikasi'    => "diterima"
         );
         $this->db->where('id_pedagang', $kriteria_id);
@@ -251,6 +328,7 @@ class Panel_admin extends CI_Controller {
 	public function tolak(){
 		$kriteria_id = $this->uri->segment(3);
 		$data = array(
+			'tgl_keanggotaan' => NULL,
 		'status_verifikasi'    => "ditolak"
         );
         $this->db->where('id_pedagang', $kriteria_id);

@@ -92,6 +92,9 @@ $user = $user->row();?>
                                         </select>
                                     </div>
                                 </div>
+                                <div class="form group">
+                                    <input type="submit" class="btn btn-primary float-right" value="Ajukan">
+                                </div>
                             </div>
                         </form>
                     </fieldset>
