@@ -21,7 +21,7 @@
       <div class="col-sm-9" style="margin-top:3px;">
         <select class="form-control bg-blue class" data-placeholder="Blok Nomor Dagangan" name="bloknomor" data-parsley-group="block3" data-parsley-errors-container='div[id="error-pdd_ayah"]' required>
                   <option value="">Pilih Blok</option>
-                  <?php foreach ($bloknomor as $bn): ?>
+                  <?php foreach ($bloknumber as $bn): ?>
                     <option value="<?php echo $bn->id; ?>"><?php echo $bn->nomor; ?></option>
                   <?php endforeach; ?>
               </select>

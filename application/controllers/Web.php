@@ -49,6 +49,7 @@ class Web extends CI_Controller {
 			$pekerjaan_ayah		= $this->input->post('pekerjaan_ayah');
 			$no_hp_dagangan			= $this->input->post('no_hp_dagangan');
 			$blokdagangan							= $this->input->post('blokdagangan');
+			$bloknomor							= $this->input->post('bloknomor');
 			$detail_lokasi_dagangan		= $this->input->post('detail_lokasi_dagangan');
 			$tgl_pedagang				= $this->Model_data->date('waktu_default');
 
@@ -74,6 +75,7 @@ class Web extends CI_Controller {
 				'jns_dagangan'				  => $jns_dagangan,
 				'no_hp_dagangan'				=> $no_hp_dagangan,
 				'blokdagangan'			=> $blokdagangan,
+				'bloknomor'			=> $bloknomor,
 				'detail_lokasi_dagangan'		=> $detail_lokasi_dagangan,
 				'tgl_pedagang'				  => $tgl_pedagang,
 				'status_verifikasi'		=> 'menunggu',
