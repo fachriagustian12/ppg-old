@@ -99,7 +99,7 @@
                     </td>
                     <td>
                       <?php 
-                        foreach($blok as $b):
+                        foreach($bloks as $b):
                           if($b->id_blok == $i->blok){
                             echo substr($b->nama_blok,5)." - ".$i->bloknomor;
                           }
@@ -110,7 +110,7 @@
                     <td><?= date('d F Y',strtotime($i->tempo)) ?></td>
                     <td>
                       <?php 
-                        foreach($blok as $b):
+                        foreach($bloks as $b):
                           if($b->id_blok == $i->blok){
                             echo $b->pj_blok;
                           }
@@ -140,74 +140,9 @@
         </div>
       </div>
       <!-- /basic datatable -->
+      <?= $this->load->view('admin/denah') ?>
     </div>
     <!-- /dashboard content -->
-
-<?php foreach($iuran as $i): ?>
-<div class="modal" id="editModal<?= $i->id ?>" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Tambah Iuran</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-            <form action="<?= base_url('panel_admin/editIuran/'.$i->id) ?>" method="post">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="" class="form-control-label">Tanggal</label>
-                    <input type="date" name="tanggal" class="form-control" value="<?= $i->tanggal ?>" required>
-                </div>
-                <div class="form-group">
-                    <label for="" class="form-control-label">Nama Petugas</label>
-                    <input type="text" name="nama_petugas" value="<?= $i->nama_petugas ?>" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="" class="form-control-label">Tipe</label>
-                    <select name="tipe" id="" class="form-control">
-                        <?php 
-                          if($i->blok == 'Keamanan'){
-                            echo "<option value='Keamanan' selected> Kemanan </option>
-                            <option value='Kebersihan'> Kebersihan </option>
-                            ";
-                          }else{
-                            echo "<option value='Keamanan'> Kemanan </option>
-                            <option value='Kebersihan' selected> Kebersihan </option>
-                            ";
-                          }
-                        ?>
-                    </select>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="" class="form-control-label">Blok</label>
-                    <select name="blok" id="" class="form-control">
-                        <?php foreach($blok as $b): ?>
-                            <option value="<?= $b->id_blok ?>" <?php if($b->id_blok == $i->id ){ echo "selected";} ?>> <?= $b->nama_blok ?></option>
-                        <?php endforeach ?>
-                    </select>
-
-                </div>
-                <div class="form-group">
-                    <label for="" class="form-control-label">Penghasilan</label>
-                    <input type="number" name="penghasilan" value="<?= $i->penghasilan ?>" min="0" class="form-control" required>
-                </div>
-            </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Simpan</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-      </form>
-    </div>
-  </div>
-</div>
-<?php endforeach ?>
 <script type="text/javascript">
   function thn()
   {

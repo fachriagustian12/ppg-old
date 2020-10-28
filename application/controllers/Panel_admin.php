@@ -120,10 +120,11 @@ class Panel_admin extends CI_Controller {
 				$bln = $_GET['bln'];
 				$thn = $_GET['thn'];
 				$data['iuran'] = $this->db->query("SELECT * FROM tbl_iuran WHERE YEAR(tanggal) = '".$thn."' AND MONTH(tanggal) = '".$bln."' ")->result();
-				$data['blok']		 = $this->db->get('tbl_blok')->result();
+				$data['bloks']		 = $this->db->get('tbl_blok')->result();
 				$data['pedagang']	= $this->db->get('tbl_pedagang')->result();
 			}
-
+			$data['blok']		 = $this->db->get('tbl_blok')->result();
+			$data['bloknumber']		 = $this->db->get('tbl_blok_nomor')->result();
 			$tanggal_sekarang = date('Y-m-d');
 			$tanggal_awal_bulan = date('Y-m-01'); //Ganti angka 01 kalo mau setiap tanggal tsb input iuran otomatis, untuk Demo
 			$tempo = date('Y-m-15');
