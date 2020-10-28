@@ -56,7 +56,7 @@ $sub_menu3 = strtolower($this->uri->segment(3));
 	} ?>
 
 	<?php
-	if ($sub_menu == "kriteria" or $sub_menu == "verifikasi" or $sub_menu == "set_pengumuman") {?>
+	if ($sub_menu == "kriteria" or $sub_menu == "verifikasi" or $sub_menu == "set_pengumuman" or $sub_menu == "iuran") {?>
 		<!-- Theme JS files -->
 	<script type="text/javascript" src="assets/panel/js/plugins/tables/datatables/datatables.min.js"></script>
 	<!-- <script type="text/javascript" src="assets/panel/js/plugins/forms/selects/select2.min.js"></script> -->

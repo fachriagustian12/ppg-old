@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Waktu pembuatan: 25 Okt 2020 pada 10.30
+-- Waktu pembuatan: 28 Okt 2020 pada 13.50
 -- Versi server: 5.7.24
 -- Versi PHP: 7.2.19
 
@@ -35,18 +35,6 @@ CREATE TABLE `tbl_blok` (
   `no_hp_pj` varchar(13) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
---
--- Dumping data untuk tabel `tbl_blok`
---
-
-INSERT INTO `tbl_blok` (`id_blok`, `nama_blok`, `pj_blok`, `no_hp_pj`) VALUES
-(1, 'Blok A', 'Mang oleh', '85'),
-(2, 'Blok B', 'Agung', '123123'),
-(3, 'Blok C', 'Wadaw', '087291209372'),
-(4, 'Blok D', 'Beni', '0124124'),
-(5, 'Blok E', 'Aji', '0125125'),
-(6, 'Blok F', 'Asep', '0123123');
-
 -- --------------------------------------------------------
 
 --
@@ -67,7 +55,22 @@ INSERT INTO `tbl_blok_nomor` (`id`, `nomor`) VALUES
 (2, 2),
 (3, 3),
 (4, 4),
-(5, 5);
+(5, 5),
+(6, 6),
+(7, 7),
+(8, 8),
+(9, 9),
+(10, 10),
+(11, 11),
+(12, 12),
+(13, 13),
+(14, 14),
+(15, 15),
+(16, 16),
+(17, 17),
+(18, 18),
+(19, 19),
+(20, 20);
 
 -- --------------------------------------------------------
 
@@ -78,19 +81,26 @@ INSERT INTO `tbl_blok_nomor` (`id`, `nomor`) VALUES
 CREATE TABLE `tbl_iuran` (
   `id` int(3) NOT NULL,
   `tanggal` date DEFAULT NULL,
-  `nama_petugas` varchar(50) NOT NULL,
-  `tipe` varchar(15) NOT NULL,
-  `blok` int(2) NOT NULL,
-  `penghasilan` int(15) NOT NULL
+  `user_id` int(3) NOT NULL,
+  `blok` int(3) NOT NULL,
+  `bloknomor` int(3) NOT NULL,
+  `tagihan` int(12) NOT NULL,
+  `tempo` date NOT NULL,
+  `status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `tbl_iuran`
 --
 
-INSERT INTO `tbl_iuran` (`id`, `tanggal`, `nama_petugas`, `tipe`, `blok`, `penghasilan`) VALUES
-(1, '2020-10-23', 'Hendrik', 'Kebersihan', 6, 2000000),
-(2, '2020-10-25', 'Agus', 'Keamanan', 3, 1000000);
+INSERT INTO `tbl_iuran` (`id`, `tanggal`, `user_id`, `blok`, `bloknomor`, `tagihan`, `tempo`, `status`) VALUES
+(47, '2020-10-28', 10, 1, 1, 40000, '2020-10-15', 0),
+(48, '2020-10-28', 11, 1, 2, 40000, '2020-10-15', 0),
+(49, '2020-10-28', 12, 1, 3, 40000, '2020-10-15', 0),
+(50, '2020-10-28', 13, 3, 2, 40000, '2020-10-15', 0),
+(51, '2020-10-28', 14, 1, 5, 40000, '2020-10-15', 0),
+(52, '2020-10-28', 16, 4, 2, 40000, '2020-10-15', 0),
+(53, '2020-10-28', 17, 2, 3, 40000, '2020-10-15', 0);
 
 -- --------------------------------------------------------
 
@@ -157,7 +167,8 @@ INSERT INTO `tbl_pedagang` (`id_pedagang`, `no_pendaftaran`, `password`, `nokk`,
 (12, 'PGG18004005', 'PGG18004005', 123, 123, '123', 'Laki-Laki', '123', '01-01-1990', 'Kristen', NULL, '123', '123', 'odading mang oleh', 'Makanan', '123', '1', 3, 'dekat pintu masuk', NULL, '2020-10-04 07:16:30', NULL, 'ditolak', 'berhasil'),
 (13, 'PGG18004006', 'PGG18004006', 123, 123, '123', 'Laki-Laki', '123', '01-01-1990', 'Islam', NULL, '123', '123', '123', 'Makanan', '123', '3', 2, '123', NULL, '2020-10-04 07:28:56', NULL, 'diterima', 'berhasil'),
 (14, 'PGG18004007', 'PGG18004007', 123, 123, '123', 'Laki-Laki', '123', '01-01-1990', 'Islam', NULL, '123', '123', '123', 'Makanan', '123', '1', 5, '123', '41155050160113_41155050160113_IMG_0003.png', '2020-10-04 07:37:31', NULL, 'ditolak', 'berhasil'),
-(16, 'PGG18004009', 'PGG18004009', 2147483647, 2147483647, 'Lengkap Sekali', 'Laki-Laki', 'Majapahit', '01-01-1990', 'lainnya', NULL, 'Jalan candi ', '089898989898', 'Dagang Nangka', 'Elektronik', '08989898989', '4', 2, 'Jalan candi block E', '3.jpg', '2020-10-23 16:45:40', '2022-10-25', 'diterima', 'berhasil');
+(16, 'PGG18004009', 'PGG18004009', 2147483647, 2147483647, 'Lengkap Sekali', 'Laki-Laki', 'Majapahit', '01-01-1990', 'lainnya', NULL, 'Jalan candi ', '089898989898', 'Dagang Nangka', 'Elektronik', '08989898989', '4', 2, 'Jalan candi block E', '3.jpg', '2020-10-23 16:45:40', '2022-10-25', 'diterima', 'berhasil'),
+(17, 'PGG18004010', 'PGG18004010', 123123123, 123123123, 'idhihh', 'Laki-Laki', 'bandung', '04-05-1994', 'Budha', NULL, 'Jalan candi ', '089898989898', 'Dagang Nangka', 'Makanan', '08989898989', '2', 3, 'Jalan candi block E', 'White with Flower Icon Floral Logo.png', '2020-10-26 16:04:15', NULL, 'ditolak', 'berhasil');
 
 -- --------------------------------------------------------
 
@@ -331,19 +342,19 @@ ALTER TABLE `tbl_web`
 -- AUTO_INCREMENT untuk tabel `tbl_blok`
 --
 ALTER TABLE `tbl_blok`
-  MODIFY `id_blok` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_blok` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_blok_nomor`
 --
 ALTER TABLE `tbl_blok_nomor`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_iuran`
 --
 ALTER TABLE `tbl_iuran`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_jns`
@@ -355,7 +366,7 @@ ALTER TABLE `tbl_jns`
 -- AUTO_INCREMENT untuk tabel `tbl_pedagang`
 --
 ALTER TABLE `tbl_pedagang`
-  MODIFY `id_pedagang` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_pedagang` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_permohonan`
@@ -367,7 +378,7 @@ ALTER TABLE `tbl_permohonan`
 -- AUTO_INCREMENT untuk tabel `tbl_permohonan_keanggotaan`
 --
 ALTER TABLE `tbl_permohonan_keanggotaan`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_user`

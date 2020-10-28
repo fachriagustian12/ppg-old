@@ -115,8 +115,38 @@ class Panel_admin extends CI_Controller {
 		}else {
 			$data['user']   	 = $this->db->get_where('tbl_user', "username='$ceks'");
 			$data['web_ppg']	 = $this->db->get_where('tbl_web', "id_web='1'")->row();
-			$data['iuran']		 = $this->db->get('tbl_iuran')->result();
-			$data['blok']		 = $this->db->get('tbl_blok')->result();
+			
+			if (isset($_GET['bln']) && isset($_GET['thn'])) {
+				$bln = $_GET['bln'];
+				$thn = $_GET['thn'];
+				$data['iuran'] = $this->db->query("SELECT * FROM tbl_iuran WHERE YEAR(tanggal) = '".$thn."' AND MONTH(tanggal) = '".$bln."' ")->result();
+				$data['blok']		 = $this->db->get('tbl_blok')->result();
+				$data['pedagang']	= $this->db->get('tbl_pedagang')->result();
+			}
+
+			$tanggal_sekarang = date('Y-m-d');
+			$tanggal_awal_bulan = date('Y-m-28'); //Ganti angka 01 kalo mau setiap tanggal tsb input iuran otomatis, untuk Demo
+			$tempo = date('Y-m-15');
+
+			if ($tanggal_sekarang == $tanggal_awal_bulan) {
+				$checking = $this->db->query("SELECT * FROM tbl_iuran WHERE tanggal='".$tanggal_awal_bulan."'");
+				if ($checking->num_rows() == 0) {
+					$pdgng = $this->db->get('tbl_pedagang')->result();
+					foreach($pdgng as $pd):
+						$datas = array(
+							'tanggal' => $tanggal_sekarang,
+							'user_id' => $pd->id_pedagang,
+							'blok' => $pd->blokdagangan,
+							'bloknomor' => $pd->bloknomor,
+							'tagihan' => 40000,
+							'tempo' => $tempo,
+							'status' => 0
+						);
+						$this->db->insert('tbl_iuran',$datas);
+					endforeach;
+				}
+			}
+			
 			$data['judul_web'] = "Dashboard";
 			$this->load->view('admin/header', $data);
 			$this->load->view('admin/iuran/iuran', $data);
@@ -141,31 +171,27 @@ class Panel_admin extends CI_Controller {
 		}
 	}
 
-	public function tambahIuran()
-	{
-		$data = array(
-			'tanggal' => $this->input->post('tanggal'),
-			'nama_petugas' => $this->input->post('nama_petugas'),
-			'tipe' => $this->input->post('tipe'),
-			'blok' => $this->input->post('blok'),
-			'penghasilan' => $this->input->post('penghasilan'),
-		);
-		$query = $this->db->insert('tbl_iuran',$data);
-		redirect('panel_admin/iuran');
-	}
+	// public function tambahIuran()
+	// {
+	// 	$data = array(
+	// 		'tanggal' => $this->input->post('tanggal'),
+	// 		'nama_petugas' => $this->input->post('nama_petugas'),
+	// 		'tipe' => $this->input->post('tipe'),
+	// 		'blok' => $this->input->post('blok'),
+	// 		'penghasilan' => $this->input->post('penghasilan'),
+	// 	);
+	// 	$query = $this->db->insert('tbl_iuran',$data);
+	// 	redirect('panel_admin/iuran');
+	// }
 
-	public function editIuran($id)
+	public function editIuran($id,$thn,$bln)
 	{
 		$data = array(
-			'tanggal' => $this->input->post('tanggal'),
-			'nama_petugas' => $this->input->post('nama_petugas'),
-			'tipe' => $this->input->post('tipe'),
-			'blok' => $this->input->post('blok'),
-			'penghasilan' => $this->input->post('penghasilan'),
+			'status' => 1
 		);
 		$this->db->where('id',$id);
 		$query = $this->db->update('tbl_iuran',$data);
-		redirect('panel_admin/iuran');
+		redirect('panel_admin/iuran?thn='.$thn.'&bln='.$bln.'');
 	}
 
 	public function deleteIuran($id)
@@ -389,6 +415,7 @@ class Panel_admin extends CI_Controller {
 
 			$data['user']  			  = $this->db->get_where('tbl_user', "username='$ceks'");
 			$data['judul_web'] 		= "Data Blok & Jenis Dagangan";
+			$data['bloknumber']	= $this->db->get('tbl_blok_nomor');
 
 			$this->db->order_by('id_jns', 'ASC');
 			$data['v_jns'] = $this->db->get('tbl_jns');

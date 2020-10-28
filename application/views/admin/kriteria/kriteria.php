@@ -36,7 +36,7 @@
               <th width="30px;">No.</th>
               <th>Nama Blok</th>
               <th>Penanggung Jawab</th>
-              <th>No HP PJ Blok</th>
+              <!-- <th>No HP PJ Blok</th> -->
               <th>Aksi</th>
             </tr>
           </thead>
@@ -46,9 +46,9 @@
               foreach ($v_blok->result() as $baris) {?>
                 <tr>
                   <td><?php echo $baris->id_blok; ?></td>
-                  <td><?php echo $baris->nama_blok; ?></td>
+                  <td><?php echo substr($baris->nama_blok,5)."1 - ".substr($baris->nama_blok,5)."".$bloknumber->num_rows() ; ?></td>
                   <td><?php echo $baris->pj_blok; ?></td>
-                  <td><?php echo $baris->no_hp_pj; ?></td>
+                  <!-- <td><?php echo $baris->no_hp_pj; ?></td> -->
                   <td align="center"><a href="panel_admin/update_blok/<?php echo $baris->id_blok; ?>">Edit</a>
                   </td>
                 </tr>
