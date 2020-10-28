@@ -125,7 +125,7 @@ class Panel_admin extends CI_Controller {
 			}
 
 			$tanggal_sekarang = date('Y-m-d');
-			$tanggal_awal_bulan = date('Y-m-28'); //Ganti angka 01 kalo mau setiap tanggal tsb input iuran otomatis, untuk Demo
+			$tanggal_awal_bulan = date('Y-m-01'); //Ganti angka 01 kalo mau setiap tanggal tsb input iuran otomatis, untuk Demo
 			$tempo = date('Y-m-15');
 
 			if ($tanggal_sekarang == $tanggal_awal_bulan) {
