@@ -72,6 +72,12 @@ $sub_menu3 = strtolower($this->uri->segment(3));
 		<link rel="stylesheet" type="text/css" href="assets/panel/css/sweetalert.css">
 
 		<script type="text/javascript" src="assets/panel/js/sweetalert.min.js"></script>
+
+		<style>
+			.table.table-bordered.denah tr td{
+				border-color: black !important;
+			}
+		</style>
 </head>
 
 <body class="navbar-bottom">
