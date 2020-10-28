@@ -207,7 +207,7 @@
         <table class="table table-bordered denah table-sm" >
             <?php 
             foreach($blok as $b):
-                if($b->id_blok == 18){
+                if($b->id_blok == 7){
                     // ambil pedagang di blok n 
                     $this->db->where('blokdagangan',$b->id_blok);
                     $ambilBlokPedagang = $this->db->get('tbl_pedagang')->result();

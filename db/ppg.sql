@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Waktu pembuatan: 28 Okt 2020 pada 13.50
+-- Waktu pembuatan: 28 Okt 2020 pada 15.23
 -- Versi server: 5.7.24
 -- Versi PHP: 7.2.19
 
@@ -29,11 +29,24 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `tbl_blok` (
-  `id_blok` int(11) NOT NULL,
+  `id_blok` int(3) NOT NULL,
   `nama_blok` varchar(100) DEFAULT NULL,
   `pj_blok` varchar(100) DEFAULT NULL,
   `no_hp_pj` varchar(13) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tbl_blok`
+--
+
+INSERT INTO `tbl_blok` (`id_blok`, `nama_blok`, `pj_blok`, `no_hp_pj`) VALUES
+(1, 'Blok A', 'Andre', '08989767588'),
+(2, 'Blok B', 'Bambang', '08324812742'),
+(3, 'Blok C', 'Chandra', '08773827423'),
+(4, 'Blok D', 'Dadang', '08973618273'),
+(5, 'Blok E', 'Egi', '08214128192'),
+(6, 'Blok F', 'Fauzan', '08912372162'),
+(7, 'Blok G', 'Gading', '082123124345');
 
 -- --------------------------------------------------------
 
@@ -342,7 +355,7 @@ ALTER TABLE `tbl_web`
 -- AUTO_INCREMENT untuk tabel `tbl_blok`
 --
 ALTER TABLE `tbl_blok`
-  MODIFY `id_blok` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_blok` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_blok_nomor`
